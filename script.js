@@ -15,7 +15,7 @@
   /* =========================
    * Logging
    * ========================= */
-  const DEBUG = true;
+  const DEBUG = false;
   const log = (...a) => DEBUG && console.log("[COMP-PING]", ...a);
   const t = () => new Date().toLocaleTimeString();
 
