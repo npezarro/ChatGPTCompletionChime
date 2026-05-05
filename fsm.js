@@ -39,13 +39,13 @@ export function createFSM({ isStopVisible, editorEmpty, playChime, now }) {
     pollId = setInterval(() => evaluate(), 250);
   }
 
-  function cancelSession(reason) {
+  function cancelSession(_reason) {
     if (!s) return;
     stopPoll();
     s = null;
   }
 
-  function arm(reason) {
+  function arm(_reason) {
     if (s) cancelSession('re-ARM');
     s = {
       id: ++sid,

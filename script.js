@@ -80,7 +80,7 @@
       await a.play();
       log(`🔊 DONE (HTMLAudio) ${reason} @ ${t()}`);
       return;
-    } catch {}
+    } catch { /* HTMLAudio may fail in background tabs */ }
     try {
       const c = ensureCtx();
       if (c.state !== "running") await c.resume();
@@ -108,13 +108,13 @@
         cur += d + gap;
       }
       log(`🔊 DONE (WebAudio) ${reason} @ ${t()}`);
-    } catch {}
+    } catch { /* WebAudio fallback may also fail */ }
   }
 
   // Prime on user interaction
   const unlock = async () => {
-    try { await primeAudioEl.play(); primeAudioEl.pause(); primeAudioEl.currentTime = 0; } catch {}
-    try { if (AudioCtx) { const c = ensureCtx(); if (c.state !== "running") await c.resume(); } } catch {}
+    try { await primeAudioEl.play(); primeAudioEl.pause(); primeAudioEl.currentTime = 0; } catch { /* prime may fail before user gesture */ }
+    try { if (AudioCtx) { const c = ensureCtx(); if (c.state !== "running") await c.resume(); } } catch { /* AudioContext resume may fail */ }
     window.removeEventListener("pointerdown", unlock, true);
     window.removeEventListener("keydown", unlock, true);
   };
