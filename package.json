@@ -2,13 +2,16 @@
   "name": "chatgpt-completion-chime",
   "version": "5.4.0",
   "private": true,
+  "type": "module",
   "description": "Chime on ChatGPT completion — FSM-based detection",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint ."
   },
   "devDependencies": {
-    "vitest": "^3.1.1",
-    "jsdom": "^26.1.0"
+    "eslint": "^9.39.4",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.1.1"
   }
 }
