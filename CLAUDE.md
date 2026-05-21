@@ -42,3 +42,10 @@ For the full ruleset, see `agent.md` in this repository.
 
 - `script.js` — Tampermonkey userscript entry point
 - `fsm.js` — Extracted FSM module for testability. Exports: `STATE` (IDLE, ARMED, CLEARED, STREAMING, DONE), `createFSM(config)`, `makeChimeWavDataURL()`, `isEditorEmpty(el)`
+
+## Tampermonkey Standards
+
+- Every `.user.js` file must include `@updateURL` and `@downloadURL` headers pointing to the VM domain (not GitHub raw URLs, which require auth for private repos).
+- Bump `@version` on every change so Tampermonkey detects the update.
+- Ship with all debug/verbose logging flags disabled. Use boolean constants (`const DEBUG = false`) and gate console output behind them. Never commit `true` to production.
+- Deploy updated scripts via `~/repos/browser-agent/sync-tm-scripts.sh` to sync to VM hosting.
